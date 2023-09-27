@@ -1,6 +1,10 @@
 import os
 import shutil
 
+from utils_base import Log
+
+log = Log('Git')
+
 
 class GitReadOnly:
     def __init__(self, git_repo_url):
@@ -48,6 +52,7 @@ class GitReadOnly:
     @staticmethod
     def run(*cmd_list):
         cmd = ' && '.join(cmd_list)
+        log.debug(cmd)
         os.system(cmd)
 
     def checkout(self, branch_name):
@@ -59,6 +64,8 @@ class GitReadOnly:
                 self.cmd_cd,
                 self.cmd_clone,
             )
+        else:
+            log.warning(f'{self.dir_repo} already exists. Skipping clone.')
 
         self.run(
             self.cmd_cd,

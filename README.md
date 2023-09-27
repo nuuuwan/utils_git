@@ -12,5 +12,8 @@ pip install utils_git-nuuuwan
 
 ## Version History 
 
+### 1.0.1
+* Added logging
+
 ### 1.0.0
 * Base Version
