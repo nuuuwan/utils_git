@@ -1,6 +1,3 @@
-from utils.Log import Log
-
-log = Log('Git')
 
 
 class GitWrite:
