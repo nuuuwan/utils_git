@@ -1,5 +1,3 @@
-
-
 class GitWrite:
     @property
     def cmd_git_push(self):

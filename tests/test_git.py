@@ -2,7 +2,7 @@ import os
 import tempfile
 import unittest
 
-from utils.Git import Git
+from utils_git.Git import Git
 
 TEST_REPO_URL = 'https://github.com/nuuuwan/utils'
 TEST_DIR_REPO = tempfile.TemporaryDirectory().name
