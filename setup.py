@@ -3,7 +3,7 @@
 import setuptools
 
 DIST_NAME = 'utils_git'
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 DESCRIPTION = "Basic Git Utilities."
 
 setuptools.setup(
