@@ -1,4 +1,5 @@
 import os
+import shutil
 import tempfile
 from functools import cache
 
@@ -9,6 +10,7 @@ from utils_git.kvs.Key import Key
 
 log = Log('KeyValueStore')
 BRANCH_EMPTY = 'empty'
+BRANCH_MAIN = 'main'
 
 
 class KeyValueStore:
@@ -24,7 +26,9 @@ class KeyValueStore:
         self.repo_name = repo_name
         self.git = Git.from_github(user_name, repo_name)
         self.temp_dir_repo = tempfile.TemporaryDirectory().name
-        self.git.clone(self.temp_dir_repo, BRANCH_EMPTY)
+
+        self.git.clone(self.temp_dir_repo, BRANCH_MAIN)
+        self.build_empty()
 
     def enter_branch(self, key: str):
         branch_name = Key(key).branch_name
@@ -54,3 +58,21 @@ class KeyValueStore:
             raise KeyError(key)
         self.exit_branch()
         return value
+
+    def build_empty(self):
+        self.git.branch(BRANCH_EMPTY)
+        self.git.checkout(BRANCH_EMPTY)
+        self.git.pull()
+        for child in os.listdir(self.temp_dir_repo):
+            if child == '.git':
+                continue
+            child_path = os.path.join(self.temp_dir_repo, child)
+            if os.path.isdir(child_path):
+                shutil.rmtree(child_path)
+            else:
+                os.remove(child_path)
+            log.debug(f'Deleted {child_path}')
+
+        self.git.add()
+        self.git.commit('Built empty')
+        self.git.push()
