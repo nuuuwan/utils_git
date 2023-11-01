@@ -1,8 +1,9 @@
 from functools import cached_property
+
 from utils_base import hashx
 
 LEN_HASH = 16
-LEN_BRANCH_ID = 8
+LEN_BRANCH_ID = 1
 
 
 class Key:
