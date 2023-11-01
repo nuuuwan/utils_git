@@ -16,8 +16,9 @@ class TestCase(unittest.TestCase):
         git = Git.from_github(USER_NAME, REPO_NAME)
 
         dir_repo = tempfile.TemporaryDirectory().name
-        git.clone(dir_repo)
+        git.clone(dir_repo, TEST_BRACH_NAME)
         git.branch(TEST_BRACH_NAME)
+        git.checkout(TEST_BRACH_NAME)
 
         git.status()
         git.diff()

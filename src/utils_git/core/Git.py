@@ -35,14 +35,19 @@ class Git:
         log.debug(f'Created {dir_repo}')
 
     # Initialization
-    def clone(self, dir_repo: str):
+    def clone(self, dir_repo: str, branch_name: str):
         # Clone (or copy) a repository from an existing URL.
         assert dir_repo is not None
+        assert branch_name is not None
 
         self.__init_dir_repo__(dir_repo)
+        self.branch_name = branch_name
 
         self.run(
             'git clone',
+            '--single-branch',
+            '--branch',
+            self.branch_name,
             self.git_repo_url,
             self.dir_repo,
         )
