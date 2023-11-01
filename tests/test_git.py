@@ -13,7 +13,6 @@ TEST_BRACH_NAME = 'main'
 
 class TestCase(unittest.TestCase):
 
-    @unittest.skip("Skipping")
     def test_lifecycle(self):
         git = Git.from_github(USER_NAME, REPO_NAME)
 
