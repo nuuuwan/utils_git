@@ -12,10 +12,12 @@ pip install utils_git-nuuuwan
 
 ## Version History 
 
-### 2.0.0 (IN DEVELOPMENT)
+### 2.0.1 (NEXT)
+
+### 2.0.0 (CURRENT)
 * Major Rewrite to simplify
 
-### 1.0.1 (CURRENT)
+### 1.0.1
 * Added logging
 
 ### 1.0.0
