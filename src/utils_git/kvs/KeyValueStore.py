@@ -1,39 +1,20 @@
 import os
 import tempfile
-from functools import cache, cached_property
+from functools import cache
 
-from utils_base import JSONFile, Log, hashx
+from utils_base import JSONFile, Log
 
 from utils_git.core.Git import Git
-
-LEN_HASH = 16
-LEN_BRANCH_ID = 8
+from utils_git.kvs.Key import Key
 
 log = Log('KeyValueStore')
+TEMP_DIR_REPO = tempfile.TemporaryDirectory().name
 
 
 class KeyValueStore:
-    @staticmethod
-    def get_hash(key: str) -> str:
-        return hashx.md5(key)[:LEN_HASH]
-
-    @staticmethod
-    def get_branch_name(key: str) -> str:
-        branch_id = KeyValueStore.get_hash(key)[:LEN_BRANCH_ID]
-        return 'kvs-' + branch_id
-
-    def get_json_file_name(key: str) -> str:
-        return KeyValueStore.get_hash(key) + ".json"
-
-    @cached_property
-    def temp_dir_repo(self) -> str:
-        return tempfile.TemporaryDirectory().name
-
     @cache
     def get_data_file_path(self, key: str) -> str:
-        return os.path.join(
-            self.temp_dir_repo, KeyValueStore.get_json_file_name(key)
-        )
+        return os.path.join(TEMP_DIR_REPO, Key(key).data_file_name)
 
     def get_data_file(self, key: str) -> JSONFile:
         return JSONFile(self.get_data_file_path(key))
@@ -42,12 +23,10 @@ class KeyValueStore:
         self.user_name = user_name
         self.repo_name = repo_name
         self.git = Git.from_github(user_name, repo_name)
-
-        self.git.clone(self.temp_dir_repo)
+        self.git.clone(TEMP_DIR_REPO)
 
     def branch_and_checkout(self, key: str):
-        branch_name = KeyValueStore.get_branch_name(key)
-        log.debug(f'{branch_name=}')
+        branch_name = Key(key).branch_name
         self.git.checkout('empty')
         self.git.branch(branch_name)
         self.git.checkout(branch_name)
