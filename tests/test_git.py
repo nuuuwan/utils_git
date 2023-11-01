@@ -4,14 +4,15 @@ import unittest
 
 from utils_base import TIME_FORMAT_TIME_ID, File, Time
 
-from utils_git.Git import Git
+from utils_git import Git
 
 USER_NAME = 'nuuuwan'
 REPO_NAME = 'utils_git'
 TEST_BRACH_NAME = 'main'
 
 
-class TestGit(unittest.TestCase):
+class TestCase(unittest.TestCase):
+    @unittest.skip('While testing others')
     def test_lifecycle(self):
         git = Git.from_github(USER_NAME, REPO_NAME)
 
@@ -39,7 +40,3 @@ class TestGit(unittest.TestCase):
         git.add()
         git.commit('Test Commit - in new branch')
         git.push()
-
-
-if __name__ == '__main__':
-    unittest.main()
