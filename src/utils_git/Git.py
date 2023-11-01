@@ -14,9 +14,10 @@ class Git:
 
     def run(self, *cmd_lines):
         assert self.dir_repo is not None
+        cmd_lines = ['cd', self.dir_repo, '&&'] + list(cmd_lines)
         cmd = ' '.join(cmd_lines)
         log.debug(cmd)
-        os.system('cd ' + self.dir_repo)
+
         os.system(cmd)
 
     # Initialization

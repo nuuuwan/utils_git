@@ -12,6 +12,9 @@ pip install utils_git-nuuuwan
 
 ## Version History 
 
+### 2.0.0
+* Major Rewrite to simplify
+
 ### 1.0.1
 * Added logging
 
