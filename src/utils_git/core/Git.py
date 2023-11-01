@@ -9,7 +9,7 @@ log = Log('Git')
 class Git:
     @staticmethod
     def from_github(user_name: str, repo_name: str):
-        return Git(f'https://github.com/{user_name}/{repo_name}')
+        return Git(f'https://github.com/{user_name}/{repo_name}.git')
 
     def __init__(self, git_repo_url: str):
         log.debug(f'Initializing Git({git_repo_url=})')
