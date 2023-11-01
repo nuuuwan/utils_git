@@ -22,8 +22,9 @@ class TestGit(unittest.TestCase):
         git.status()
         git.diff()
 
+        time_id = TIME_FORMAT_TIME_ID.stringify(Time.now())
         test_file = os.path.join(TEST_DIR_REPO, 'tests', 'test.txt')
-        File(test_file).write(TIME_FORMAT_TIME_ID.stringify(Time.now()))
+        File(test_file).write('TestGit wrote ' + time_id)
 
         git.add()
         git.commit('Test Commit')
@@ -32,6 +33,13 @@ class TestGit(unittest.TestCase):
         git.push()
 
         git.checkout(TEST_BRACH_NAME)
+        new_branch_name = 'test_branch-' + time_id
+        git.branch(new_branch_name)
+        test_file = os.path.join(TEST_DIR_REPO, 'tests', 'branch-test.txt')
+        File(test_file).write('TestGit (new branch) wrote ' + time_id)
+        git.add()
+        git.commit('Test Commit - in new branch')
+        git.push()
 
 
 if __name__ == '__main__':
