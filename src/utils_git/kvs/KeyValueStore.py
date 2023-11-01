@@ -8,13 +8,12 @@ from utils_git.core.Git import Git
 from utils_git.kvs.Key import Key
 
 log = Log('KeyValueStore')
-TEMP_DIR_REPO = tempfile.TemporaryDirectory().name
 
 
 class KeyValueStore:
     @cache
     def get_data_file_path(self, key: str) -> str:
-        return os.path.join(TEMP_DIR_REPO, Key(key).data_file_name)
+        return os.path.join(self.temp_dir_repo, Key(key).data_file_name)
 
     def get_data_file(self, key: str) -> JSONFile:
         return JSONFile(self.get_data_file_path(key))
@@ -23,7 +22,8 @@ class KeyValueStore:
         self.user_name = user_name
         self.repo_name = repo_name
         self.git = Git.from_github(user_name, repo_name)
-        self.git.clone(TEMP_DIR_REPO)
+        self.temp_dir_repo = tempfile.TemporaryDirectory().name
+        self.git.clone(self.temp_dir_repo)
 
     def branch_and_checkout(self, key: str):
         branch_name = Key(key).branch_name
