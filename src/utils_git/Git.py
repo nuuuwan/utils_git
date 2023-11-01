@@ -7,6 +7,10 @@ log = Log('Git')
 
 
 class Git:
+    @staticmethod
+    def from_github(user_name, repo_name):
+        return Git(f'https://github.com/{user_name}/{repo_name}')
+
     def __init__(self, git_repo_url):
         self.git_repo_url = git_repo_url
         self.dir_repo = None
