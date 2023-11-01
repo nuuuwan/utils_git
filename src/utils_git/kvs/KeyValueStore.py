@@ -4,7 +4,7 @@ from functools import cache, cached_property
 
 from utils_base import JSONFile, Log, hashx
 
-from utils_git.Git import Git
+from utils_git.core.Git import Git
 
 LEN_HASH = 16
 LEN_BRANCH_ID = 8

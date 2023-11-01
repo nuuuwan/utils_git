@@ -1,2 +1,2 @@
-from utils_git.Git import Git
-from utils_git.KeyValueStore import KeyValueStore
+from utils_git.core.Git import Git
+from utils_git.kvs.KeyValueStore import KeyValueStore
