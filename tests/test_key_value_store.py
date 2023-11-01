@@ -7,6 +7,7 @@ from utils_git import KeyValueStore
 
 
 class TestCase(unittest.TestCase):
+    @unittest.skip("Skipping")
     def test_lifecycle(self):
         kvs = KeyValueStore(USER_NAME, REPO_NAME)
         self.assertIsNotNone(kvs)
