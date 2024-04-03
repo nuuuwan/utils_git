@@ -46,6 +46,7 @@ class Git:
         self.run(
             'git clone',
             '--single-branch',
+            '--depth 1',
             '--branch',
             self.branch_name,
             self.git_repo_url,

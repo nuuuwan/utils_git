@@ -14,6 +14,8 @@ pip install utils_git-nuuuwan
 
 ### 2.0.1 (NEXT)
 
+* Shallow clone only (--depth 1)
+
 ### 2.0.0 (CURRENT)
 * Major Rewrite to simplify
 
