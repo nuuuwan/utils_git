@@ -12,7 +12,6 @@ TEST_BRACH_NAME = 'main'
 
 
 class TestCase(unittest.TestCase):
-
     def test_lifecycle(self):
         git = Git.from_github(USER_NAME, REPO_NAME)
 

@@ -12,11 +12,13 @@ pip install utils_git-nuuuwan
 
 ## Version History 
 
-### 2.0.1 (NEXT)
 
+### 2.0.2 (NEXT)
+
+### 2.0.1 (CURRENT)
 * Shallow clone only (--depth 1)
 
-### 2.0.0 (CURRENT)
+### 2.0.0 
 * Major Rewrite to simplify
 
 ### 1.0.1
